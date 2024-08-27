@@ -6,11 +6,13 @@ class DogBreedCard extends StatelessWidget {
   final DogBreed dogBreed;
   final bool isFavorite;
   final VoidCallback onFavoritePressed;
+  final VoidCallback onDeletePressed;
 
   DogBreedCard({
     required this.dogBreed,
     required this.isFavorite,
     required this.onFavoritePressed,
+    required this.onDeletePressed,
   });
 
   @override
@@ -19,13 +21,13 @@ class DogBreedCard extends StatelessWidget {
       margin: EdgeInsets.all(8.0),
       child: ListTile(
         leading: Container(
-          width: 80, // 이미지의 폭을 80으로 고정
-          height: 80, // 이미지의 높이를 80으로 고정
+          width: 80,
+          height: 80,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(5.0), // 이미지 모서리를 둥글게 처리
+            borderRadius: BorderRadius.circular(8.0),
             child: Image.network(
               dogBreed.imageUrl,
-              fit: BoxFit.cover, // 이미지가 컨테이너를 꽉 채우도록 설정
+              fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Center(child: Text('이미지를 불러올 수 없습니다.'));
               },
@@ -54,6 +56,10 @@ class DogBreedCard extends StatelessWidget {
                   ),
                 );
               },
+            ),
+            IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: onDeletePressed,
             ),
           ],
         ),
